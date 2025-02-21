@@ -1,6 +1,5 @@
 package com.ilailson.crud_spring.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
@@ -22,7 +21,7 @@ public class Course {
     private Long id;
 
     @Column(length = 200, nullable = false)
-    private String nome;
+    private String name;
 
     @Column(length = 10 , nullable = false)
     private String category;

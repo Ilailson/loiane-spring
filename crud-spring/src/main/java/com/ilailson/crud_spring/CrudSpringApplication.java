@@ -20,7 +20,7 @@ public class CrudSpringApplication {
 		return args -> {
 			courseRepository.deleteAll();
 			Course c = new Course();
-			c.setNome("Java");
+			c.setName("Java");
 			c.setCategory("Linux");
 
 			courseRepository.save(c);
