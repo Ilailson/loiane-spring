@@ -20,8 +20,8 @@ public class CrudSpringApplication {
 		return args -> {
 			courseRepository.deleteAll();
 			Course c = new Course();
-			c.setName("Java");
-			c.setCategory("Linux");
+			c.setName("JavaLinux");
+			c.setCategory("Front-end"); // Se o regex estiver "Backe-end"
 
 			courseRepository.save(c);
 		};
