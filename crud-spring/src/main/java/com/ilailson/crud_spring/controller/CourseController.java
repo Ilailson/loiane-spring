@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated; // +
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ilailson.crud_spring.model.Course;
 import com.ilailson.crud_spring.repository.CourseRepository;
 
-import jakarta.validation.Valid; // +
-import jakarta.validation.constraints.NotNull; // +
-import jakarta.validation.constraints.Positive; // +
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 
 @Validated
@@ -33,8 +33,8 @@ public class CourseController {
 
 
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Course> findById(@PathVariable @NotNull @Positive Long id) { // + @NotNull @Positive
+    @GetMapping("/{id}")// utilizado para visualizar só os ativos da deleção lógica com hibernate 
+    public ResponseEntity<Course> findById(@PathVariable @NotNull @Positive Long id) {
         return courseRepository
                 .findById(id)
                 .map(record -> ResponseEntity.ok(record))
@@ -46,7 +46,7 @@ public class CourseController {
     // } mesma coisa @AllArgsConstructor
 
     // @RequestMapping(method = RequestMethod.GET)
-    @GetMapping
+    @GetMapping // utilizado para visualizar só os ativos da deleção lógica com hibernate 
     public List<Course> list(){
         return courseRepository.findAll();
     }
@@ -54,7 +54,7 @@ public class CourseController {
     // @RequestMapping(method =  RequestMethod.POST)
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Course create(@RequestBody @Valid Course course) { // + @Valid
+    public Course create(@RequestBody @Valid Course course) {
         return courseRepository.save(course);
         // System.out.println(course.getName());
         // return ResponseEntity
@@ -65,7 +65,7 @@ public class CourseController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Course> update(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid Course course) { // + @Valid
+    public ResponseEntity<Course> update(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid Course course) {
         return courseRepository
                 .findById(id) // Usando a instância correta
                 .map(recordFound -> {
@@ -77,8 +77,8 @@ public class CourseController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void>  delete(@PathVariable @NotNull @Positive Long id){ // + @NotNull @Positive
+    @DeleteMapping("/{id}") // utilizado na deleção lógica com hibernate 
+    public ResponseEntity<Void>  delete(@PathVariable @NotNull @Positive Long id){
         return courseRepository
                 .findById(id) // Usando a instância correta
                 .map(recordFound -> {
