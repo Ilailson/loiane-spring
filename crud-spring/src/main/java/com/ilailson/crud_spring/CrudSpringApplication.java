@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.ilailson.crud_spring.enums.Category; // +
 import com.ilailson.crud_spring.model.Course;
 import com.ilailson.crud_spring.repository.CourseRepository;
 
@@ -20,8 +21,8 @@ public class CrudSpringApplication {
 		return args -> {
 			courseRepository.deleteAll();
 			Course c = new Course();
-			c.setName("JavaLinux");
-			c.setCategory("Front-end"); // Se o regex estiver "Backe-end"
+			c.setName("Angular com Spring"); // +
+			c.setCategory(Category.FRONT_END); // +
 
 			courseRepository.save(c);
 		};

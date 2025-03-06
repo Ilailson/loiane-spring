@@ -3,6 +3,7 @@ package com.ilailson.crud_spring.dto.mapper;
 import org.springframework.stereotype.Component;
 
 import com.ilailson.crud_spring.dto.CourseDTO;
+import com.ilailson.crud_spring.enums.Category;
 import com.ilailson.crud_spring.model.Course;
 
 @Component
@@ -13,7 +14,7 @@ public class CourseMapper {
             return null; //evitar nullpointer
         }
 
-        return new CourseDTO(course.getId(), course.getName(), course.getCategory());
+        return new CourseDTO(course.getId(), course.getName(), "Front-end");
     }
 
     public Course toEntity(CourseDTO courseDTO) {
@@ -27,7 +28,7 @@ public class CourseMapper {
             course.setId(courseDTO.id());
         }
         course.setName(courseDTO.name());
-        course.setCategory(courseDTO.category());
+        course.setCategory(Category.FRONT_END);
         return  course;
 
         //lê Builder pattern. Para vários campos
