@@ -1,8 +1,12 @@
 package com.ilailson.crud_spring.dto.mapper;
 
+import java.util.List; // +
+import java.util.stream.Collectors; // +
+
 import org.springframework.stereotype.Component;
 
 import com.ilailson.crud_spring.dto.CourseDTO;
+import com.ilailson.crud_spring.dto.LessonDTO; // +
 import com.ilailson.crud_spring.enums.Category;
 import com.ilailson.crud_spring.model.Course;
 
@@ -14,11 +18,20 @@ public class CourseMapper {
             return null; //evitar nullpointer
         }
 
+        List<LessonDTO> lessons = course
+                        .getLessons()
+                        .stream()
+                        .map(lesson -> new LessonDTO( // +
+                            lesson.getId(), // +
+                            lesson.getName(), // +
+                            lesson.getYoutubeUrl())) // +
+                        .collect(Collectors.toList()); // +
+
         return new CourseDTO(
             course.getId(),
             course.getName(),
             course.getCategory().getValue(),
-            course.getLessons());
+            lessons); // +
     }
 
     public Course toEntity(CourseDTO courseDTO) {
