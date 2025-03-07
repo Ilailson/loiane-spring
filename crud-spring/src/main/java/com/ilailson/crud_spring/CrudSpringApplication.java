@@ -5,8 +5,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.ilailson.crud_spring.enums.Category; // +
+import com.ilailson.crud_spring.enums.Category;
 import com.ilailson.crud_spring.model.Course;
+import com.ilailson.crud_spring.model.Lesson;
 import com.ilailson.crud_spring.repository.CourseRepository;
 
 @SpringBootApplication
@@ -20,13 +21,20 @@ public class CrudSpringApplication {
 	CommandLineRunner initDatabase(CourseRepository courseRepository){
 		return args -> {
 			courseRepository.deleteAll();
+
 			Course c = new Course();
-			c.setName("Angular com Spring"); // +
-			c.setCategory(Category.FRONT_END); // +
+			c.setName("Angular com Spring");
+			c.setCategory(Category.FRONT_END);
+
+			Lesson l = new Lesson();
+			l.setName("Introdução ao Angular");
+			l.setYoutubeUrl("outubcom");
+			l.setCourse(c);
+			c.getLessons().add(l);
 
 			courseRepository.save(c);
-		};
 
+		};
 	}
 
 }
