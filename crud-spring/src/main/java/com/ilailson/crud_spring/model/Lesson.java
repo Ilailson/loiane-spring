@@ -1,5 +1,7 @@
 package com.ilailson.crud_spring.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -27,5 +29,7 @@ public class Lesson {
     //@ManyToOne... Muitas aulas para um curso
     @ManyToOne(fetch = FetchType.LAZY, optional = false )
     @JoinColumn(name = "course_id", nullable = false)
+    // dependencia circulare ou seja o curso depende da aula e a aula depende do curso
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // nós apenas vamos fazer o sett desse curso e não o gett
     private Course course;
 }

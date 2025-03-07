@@ -14,7 +14,11 @@ public class CourseMapper {
             return null; //evitar nullpointer
         }
 
-        return new CourseDTO(course.getId(), course.getName(), course.getCategory().getValue());
+        return new CourseDTO(
+            course.getId(),
+            course.getName(),
+            course.getCategory().getValue(),
+            course.getLessons());
     }
 
     public Course toEntity(CourseDTO courseDTO) {
